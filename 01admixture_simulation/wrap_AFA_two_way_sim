@@ -1,0 +1,13 @@
+#!/bin/bash 
+#$ -pe mpi 1
+#$ -N simulate HIS_two_way
+
+/home/rschubert1/scratch/software/Local_Ancestry/adsim/01simulate_wrapper.sh \
+--1000G /home/rschubert1/data/Local_ancestry_project/1000G_references/raw_ref/raw_afa/chr22.recode_AFA_TWO_WAY_REFERENCE.vcf.gz \
+--out /home/rschubert1/data/Local_ancestry_project/redoancestry/afatwoway/AFA_11g \
+--nsim 1000 \
+--chr 22 \
+-g 11 \
+-m /home/rschubert1/data/chr22.interpolated_genetic_map \
+--samples /home/rschubert1/data/Local_ancestry_project/1000G_references/2_way_afa_pop_code.txt
+

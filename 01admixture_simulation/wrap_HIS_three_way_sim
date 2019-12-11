@@ -1,0 +1,13 @@
+#!/bin/bash 
+#$ -pe mpi 1
+#$ -N simulate HIS_three_way
+
+/home/rschubert1/scratch/software/Local_Ancestry/adsim/01simulate_wrapper.sh \
+--1000G /home/rschubert1/data/Local_ancestry_project/1000G_references/raw_ref/raw_his/three_way_reference/chr22.recode_HIS_THREE_WAY_REFERENCE.vcf.gz \
+--out /home/rschubert1/data/Local_ancestry_project/redoancestry/threeway/his_three_way \
+--nsim 1000 \
+--chr 22 \
+-g 11 \
+-m /home/rschubert1/data/chr22.interpolated_genetic_map \
+--samples /home/rschubert1/data/Local_ancestry_project/1000G_references/3_way_his_pop_code.txt
+
