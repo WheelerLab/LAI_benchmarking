@@ -1,0 +1,10 @@
+#!/bin/bash
+
+Rscript /home/rschubert1/data/Local_ancestry_project/plot_LA_distribution.R \
+--result /home/rschubert1/data/Local_ancestry_project/redoancestry/threeway/his_three_way.result \
+--samples /home/rschubert1/data/Local_ancestry_project/redoancestry/threeway/his_three_way.ref.map \
+--out /home/rschubert1/data/Local_ancestry_project/redoancestry/threeway/HIS_threeway_Local_ancestry \
+--title "HIS three way ancestry" \
+--ancestry CEU \
+--ancestry_threshold 60 \
+--ancestry_range 10

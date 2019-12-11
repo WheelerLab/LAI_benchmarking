@@ -1,0 +1,9 @@
+#!/bin/bash
+
+Rscript /home/rschubert1/data/Local_ancestry_project/subset_results.R \
+--results /home/rschubert1/data/Local_ancestry_project/redoancestry/afatwoway/AFA_11g.result \
+--samples /home/rschubert1/data/Local_ancestry_project/redoancestry/afatwoway/AFA_adm_IDs_100n \
+--bim /home/rschubert1/data/Local_ancestry_project/redoancestry/afatwoway/thin_thinned_list.bim \
+--plot \
+--popcode /home/rschubert1/data/Local_ancestry_project/redoancestry/afatwoway/AFA_11g.ref.map \
+--out /home/rschubert1/data/Local_ancestry_project/redoancestry/afatwoway/100n_clean

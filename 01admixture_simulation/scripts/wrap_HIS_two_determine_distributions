@@ -1,0 +1,10 @@
+#!/bin/bash
+
+Rscript /home/rschubert1/data/Local_ancestry_project/plot_LA_distribution.R \
+--result /home/rschubert1/data/Local_ancestry_project/redoancestry/histwoway/his_two_way.result \
+--samples /home/rschubert1/data/Local_ancestry_project/redoancestry/histwoway/his_two_way.ref.map \
+--out /home/rschubert1/data/Local_ancestry_project/redoancestry/histwoway/HIS_twoway_Local_ancestry \
+--title "HIS two way ancestry" \
+--ancestry CEU \
+--ancestry_threshold 70 \
+--ancestry_range 10

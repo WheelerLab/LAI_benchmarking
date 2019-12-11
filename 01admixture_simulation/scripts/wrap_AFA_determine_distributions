@@ -1,0 +1,10 @@
+#!/bin/bash
+
+Rscript /home/rschubert1/data/Local_ancestry_project/plot_LA_distribution.R \
+--result /home/rschubert1/data/Local_ancestry_project/redoancestry/afatwoway/AFA_11g.result \
+--samples /home/rschubert1/data/Local_ancestry_project/redoancestry/afatwoway/AFA_11g.ref.map \
+--out /home/rschubert1/data/Local_ancestry_project/redoancestry/afatwoway/AFA_twoway_Local_ancestry \
+--title "AFA two way ancestry" \
+--ancestry YRI \
+--ancestry_threshold 80 \
+--ancestry_range 10
