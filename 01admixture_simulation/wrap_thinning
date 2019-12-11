@@ -1,0 +1,21 @@
+#!/bin/bash
+/home/rschubert1/scratch/software/Local_Ancestry/adsim/02bMake_thinned.sh \
+--vcf /home/rschubert1/data/Local_ancestry_project/redoancestry/afatwoway/AFA_two_way_adm_100n.vcf \
+--bcf /home/rschubert1/data/Local_ancestry_project/redoancestry/afatwoway/AFA_11g.ref.bcf.gz \
+-t 50000 \
+-m /home/rschubert1/data/Local_ancestry_project/redoancestry/afatwoway/AFA_11g_genetic_map_intersection.txt \
+-o /home/rschubert1/data/Local_ancestry_project/redoancestry/afatwoway/thin
+
+/home/rschubert1/scratch/software/Local_Ancestry/adsim/02bMake_thinned.sh \
+--vcf /home/rschubert1/data/Local_ancestry_project/redoancestry/histwoway/HIS_two_way_adm_samples_100n.vcf \
+--bcf /home/rschubert1/data/Local_ancestry_project/redoancestry/histwoway/his_two_way.ref.bcf.gz \
+-t 50000 \
+-m /home/rschubert1/data/Local_ancestry_project/redoancestry/histwoway/his_two_way_genetic_map_intersection.txt \
+-o /home/rschubert1/data/Local_ancestry_project/redoancestry/histwoway/thin
+
+/home/rschubert1/scratch/software/Local_Ancestry/adsim/02bMake_thinned.sh \
+--vcf /home/rschubert1/data/Local_ancestry_project/redoancestry/threeway/his_three_way_adm_subset_100n.vcf \
+--bcf /home/rschubert1/data/Local_ancestry_project/redoancestry/threeway/his_three_way.ref.bcf.gz \
+-t 50000 \
+-m /home/rschubert1/data/Local_ancestry_project/redoancestry/threeway/his_three_way_genetic_map_intersection.txt \
+-o /home/rschubert1/data/Local_ancestry_project/redoancestry/threeway/thin
