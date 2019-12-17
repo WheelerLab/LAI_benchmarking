@@ -1,0 +1,7 @@
+#!/bin/bash
+
+Rscript /home/rschubert1/data/Local_ancestry_project/paper_run_ASW/01bIntersect_map_snp_list.R \
+--snps /home/rschubert1/data/Local_ancestry_project/paper_run_ASW/snp_list \
+--map /home/rschubert1/data/Local_ancestry_project/maps/interpolated_from_hapmap/chr22.interpolated_genetic_map \
+--out /home/rschubert1/data/Local_ancestry_project/paper_run_ASW/ASW \
+--thin 50000

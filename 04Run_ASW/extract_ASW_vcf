@@ -1,0 +1,10 @@
+#!/bin/bash
+
+##only have to do ASW for chr22 bc of lampld limits
+bcftools view \
+--samples-file /home/rschubert1/data/Local_ancestry_project/paper_run_ASW/ASW_samples.txt \
+-o /home/rschubert1/data/Local_ancestry_project/paper_run_ASW/ASW_chr22.vcf.gz \
+-O z \
+--regions 22 \
+--force-samples \
+/home/rschubert1/scratch/1000G.bcf.gz

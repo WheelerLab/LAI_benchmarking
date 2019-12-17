@@ -1,0 +1,9 @@
+#!/bin/bash 
+
+
+/home/rschubert1/scratch/software/Local_Ancestry/adsim/02bMake_thinned.sh \
+--vcf /home/rschubert1/data/Local_ancestry_project/paper_run_ASW/ASW_chr22.vcf.gz \
+--bcf /home/rschubert1/data/Local_ancestry_project/1000G_references/raw_ref/raw_afa/chr22.recode_AFA_TWO_WAY_REFERENCE.vcf.gz \
+-t 50000 \
+-m /home/rschubert1/data/Local_ancestry_project/maps/interpolated_from_hapmap/chr22.interpolated_genetic_map \
+-o /home/rschubert1/data/Local_ancestry_project/paper_run_ASW/rethin/ASW

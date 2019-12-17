@@ -1,0 +1,16 @@
+#!/bin/bash
+#$ -S /bin/bash
+#$ -pe mpi 1
+#$ -N correlate
+
+
+Rscript /home/rschubert1/data/Local_ancestry_project/paper_run_ASW/run_software/correlate_methods.R \
+--viterbi /home/rschubert1/data/Local_ancestry_project/paper_run_ASW/two_way/RFMix/results_ASW_results/2_way_afa_pop_code.rfmix.2.Viterbi.txt \
+--long /home/rschubert1/data/Local_ancestry_project/paper_run_ASW/two_way/LampLD/ASWadmixed_est.long \
+--rdata /home/rschubert1/data/Local_ancestry_project/paper_run_ASW/two_way/Mosaic/MOSAIC_RESULTS/localanc_ASW_2way_1-61_22-22_536_60_0.99_100.RData \
+--ps.21 /home/rschubert1/data/Local_ancestry_project/paper_run_ASW/two_way/Elai/ASW.ps21.txt \
+--loter /home/rschubert1/data/Local_ancestry_project/paper_run_ASW/two_way/Loter/ASW_results.txt \
+--nanc 2 \
+--intermediate /home/rschubert1/data/Local_ancestry_project/paper_run_ASW/two_way/Mosaic/intermediate/ \
+--bim /home/rschubert1/data/Local_ancestry_project/paper_run_ASW/two_way/Mosaic/intermediate/ASW_22_cm.bim \
+--out /home/rschubert1/data/Local_ancestry_project/paper_run_ASW/two_way/software_correlation.txt
