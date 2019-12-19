@@ -3,8 +3,14 @@ library(ggplot2)
 library(lubridate)
 library(viridis)
 
-benchmarks<-fread("~/data/Local_ancestry_project/ASW_simulations/bench/benches.txt", header = T)
+benchmarks<-fread("Z:/data/Local_ancestry_project/ASW_simulations/bench/benches.txt", header = T)
 benchmarks<-benchmarks[complete.cases(benchmarks),]
+
+benchmarks$software<-gsub("rfmix","RFMix",benchmarks$software)
+benchmarks$software<-gsub("elai","ELAI",benchmarks$software)
+benchmarks$software<-gsub("mosaic","MOSAIC",benchmarks$software)
+benchmarks$software<-gsub("loter","Loter",benchmarks$software)
+benchmarks$software<-gsub("lampld","LAMPLD",benchmarks$software)
 
 time<-benchmarks[metric=="time"]
 time$new_time <- as.numeric(ms(time$value, roll = T))
@@ -21,40 +27,40 @@ mem$Gb <- as.numeric(mem$value) / 1000000 #to MB
 mem$title<-"Memory Usage with Respect to Sample Size"
 mem_plot<-ggplot(data=mem,aes(x=n, y = Gb))
 setEPS()
-postscript("~/data/Local_ancestry_project/ASW_simulations/bench/mem_Gb.eps")
+postscript("Z:/data/Local_ancestry_project/ASW_simulations/bench/mem_Gb.eps")
 mem_plot + geom_point(aes(color = software),size=3) + 
   geom_line(aes(color = software),size=1.2) + 
-  labs(x = "n individuals", y = "run mememory (Gb)") +
+  labs(x = "n Individuals", y = "Run Memory (GB)") +
   theme_bw(20) +
   facet_wrap(~title) +
   theme(text = element_text(size = 15)) + 
-  scale_color_viridis(option = "inferno",discrete=T,begin = 0.1, end = 0.9)
+  scale_color_viridis(discrete = T)
 dev.off()
 
 time$title<-"Runtime with Respect to Sample Size"
 time_plot<-ggplot(data=time,aes(x=n, y = hours))
 setEPS()
-postscript("~/data/Local_ancestry_project/ASW_simulations/bench/time.eps")
+postscript("Z:/data/Local_ancestry_project/ASW_simulations/bench/time.eps")
 time_plot + geom_point(aes(color = software),size=3) + 
   geom_line(aes(color = software),size=1.2) + 
-  labs(x = "n individuals", y = "runtime (hr)") +
+  labs(x = "n Individuals", y = "Runtime (hr)") +
   facet_wrap(~title) +
   theme_bw(20) +
   theme(text = element_text(size = 15)) + 
-  scale_color_viridis(option = "inferno", begin = 0.1, end = 0.9,discrete = T)
+  scale_color_viridis(discrete = T)
 dev.off()
 #plot(rf_quadratic_model)
 
-rf_time<-time[software =="rfmix",]
-lamp_time<-time[software =="lampld",]
-elai_time<-time[software =="elai",]
-mosaic_time<-time[software =="mosaic",]
-loter_time<-time[software =="loter",]
+rf_time<-time[software =="RFMix",]
+lamp_time<-time[software =="LAMPLD",]
+elai_time<-time[software =="ELAI",]
+mosaic_time<-time[software =="MOSAIC",]
+loter_time<-time[software =="Loter",]
 
 rf_linear_model<-lm(new_time~n,rf_time)
 rf_quadratic_model<-lm(new_time~I(n^2),rf_time)
-summary(rf_linear_model)$r.squared
-summary(rf_quadratic_model)$r.squared
+summary(rf_linear_model)
+summary(rf_quadratic_model)
 
 lampld_linear_model<-lm(new_time~n,lamp_time)
 lampld_quadratic_model<-lm(new_time~I(n^2),lamp_time)
