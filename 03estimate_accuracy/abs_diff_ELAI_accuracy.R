@@ -9,6 +9,7 @@ parser <- ArgumentParser()
 parser$add_argument("--ps.21", help="resultant output of ELAI")
 parser$add_argument("--haps.sample", help="admixed samle list as in MOSAIC intermediate files")
 parser$add_argument("--nancestries", help="number of ancestries")
+parser$add_argument("--anc", help="number of ancestries")
 parser$add_argument("--result", help="results file output by adsimr")
 parser$add_argument("--pos", help="snplist")
 parser$add_argument("--out", help="file you would like to output as")
@@ -122,44 +123,45 @@ for (i in c(1:nindv)){
     flip<-c(2,1,3)
   } else {
     storage_indices<-c(j-1,j)
-    flip<-c(1,2)
+    flip<-c(2,1)
   }
   elai_indiv_i<-elai_ancestry_decomposed_diploid[,storage_indices]
-   elai_indiv_i<- elai_indiv_i[,flip]
-  true_indiv_i<-true_ancestry_decomposed_diploid[,storage_indices]
-  corr<-cor.test(elai_indiv_i,true_indiv_i)
-  if (nanc == 3){
-    #elai_indiv_i<-elai_indiv_i[,flip]
-    #str(elai_indiv_i)
-    corr<-cor.test(elai_indiv_i,true_indiv_i)
+  if (args$anc == "HIS"){
+    elai_indiv_i<-elai_indiv_i[,flip]
   }
-  dip_corr[i]<-corr$estimate
+  true_indiv_i<-true_ancestry_decomposed_diploid[,storage_indices]
+  corr<-sum(abs(elai_indiv_i - true_indiv_i))/2
+  if (nanc == 3){
+    elai_indiv_i<-elai_indiv_i[,flip]
+    #str(elai_indiv_i)
+    corr<-sum(abs(elai_indiv_i - true_indiv_i))/3
+  }
+  dip_corr[i]<-corr
   
   j<-i*nanc
-  if(nanc==3){
-    storage_indices<-c(j-2,j-1,j)
-    corr1<-cor.test(elai_ancestry_decomposed_diploid[,j-1],true_ancestry_decomposed_diploid[,j-2], method="pearson")
-    corr2<-cor.test(elai_ancestry_decomposed_diploid[,j-2],true_ancestry_decomposed_diploid[,j-1], method="pearson")
-    corr3<-cor.test(elai_ancestry_decomposed_diploid[,j],true_ancestry_decomposed_diploid[,j], method="pearson")
-    # if (corr1$estimate < 0){
-    #   corr1<-cor.test(elai_ancestry_decomposed_diploid[,j-2],true_ancestry_decomposed_diploid[,j-2], method="pearson")
-    #   corr2<-cor.test(elai_ancestry_decomposed_diploid[,j-1],true_ancestry_decomposed_diploid[,j-1], method="pearson")
-    # }
-    anc_corr[storage_indices]<-c(corr1$estimate,corr2$estimate,corr3$estimate)
-  } else {
-    storage_indices<-c(j-1,j)
-    corr1<-cor.test(elai_ancestry_decomposed_diploid[,j-1],true_ancestry_decomposed_diploid[,j], method="pearson")
-    corr2<-cor.test(elai_ancestry_decomposed_diploid[,j],true_ancestry_decomposed_diploid[,j-1], method="pearson")
-    # if (corr1$estimate < 0){
-    #   corr1<-cor.test(elai_ancestry_decomposed_diploid[,j-1],true_ancestry_decomposed_diploid[,j], method="pearson")
-    #   corr2<-cor.test(elai_ancestry_decomposed_diploid[,j],true_ancestry_decomposed_diploid[,j-1], method="pearson")
-    # }
-    anc_corr[storage_indices]<-c(corr1$estimate,corr2$estimate)
-  }
+  # if(nanc==3){
+  #   storage_indices<-c(j-2,j-1,j)
+  #   corr1<-cor.test(elai_ancestry_decomposed_diploid[,j-1],true_ancestry_decomposed_diploid[,j-2], method="pearson")
+  #   corr2<-cor.test(elai_ancestry_decomposed_diploid[,j-2],true_ancestry_decomposed_diploid[,j-1], method="pearson")
+  #   corr3<-cor.test(elai_ancestry_decomposed_diploid[,j],true_ancestry_decomposed_diploid[,j], method="pearson")
+  #   # if (corr1$estimate < 0){
+  #   #   corr1<-cor.test(elai_ancestry_decomposed_diploid[,j-2],true_ancestry_decomposed_diploid[,j-2], method="pearson")
+  #   #   corr2<-cor.test(elai_ancestry_decomposed_diploid[,j-1],true_ancestry_decomposed_diploid[,j-1], method="pearson")
+  #   # }
+  #   anc_corr[storage_indices]<-c(corr1$estimate,corr2$estimate,corr3$estimate)
+  # } else {
+  #   storage_indices<-c(j-1,j)
+  #   corr1<-cor.test(elai_ancestry_decomposed_diploid[,j-1],true_ancestry_decomposed_diploid[,j], method="pearson")
+  #   corr2<-cor.test(elai_ancestry_decomposed_diploid[,j],true_ancestry_decomposed_diploid[,j-1], method="pearson")
+  #   # if (corr1$estimate < 0){
+  #   #   corr1<-cor.test(elai_ancestry_decomposed_diploid[,j-1],true_ancestry_decomposed_diploid[,j], method="pearson")
+  #   #   corr2<-cor.test(elai_ancestry_decomposed_diploid[,j],true_ancestry_decomposed_diploid[,j-1], method="pearson")
+  #   # }
+  #   anc_corr[storage_indices]<-c(corr1$estimate,corr2$estimate)
+  # }
 }
-#anc_corr
-dip_corr
-mean(dip_corr)
+anc_corr
+# dip_corr
 fwrite(as.list(dip_corr),args$out,sep ="\t")
 
 

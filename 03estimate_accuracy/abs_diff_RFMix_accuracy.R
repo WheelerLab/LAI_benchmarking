@@ -11,6 +11,7 @@ parser$add_argument("--haps.hap.gz", help="haplotype genome file")
 parser$add_argument("--ref.map", help="admixed sample list")
 parser$add_argument("--classes", help="classes file made for rfmix input")
 parser$add_argument("--nanc", help="number of ancestries estimated")
+parser$add_argument("--anc", help="ancestry estimated")
 parser$add_argument("--result", help="results file output by adsim")
 parser$add_argument("--out", help="file you would like to output as")
 args <- parser$parse_args()
@@ -104,19 +105,27 @@ for (i in c(1:nindv)){
     flip<-c(2,1)
   }
   rf_indiv_i<-rf_ancestry_decomposed_diploid[,storage_indices]
+  if (args$anc == "HIS"){
+    rf_indiv_i<-rf_indiv_i[,flip]
+  }
   true_indiv_i<-true_ancestry_decomposed_diploid[,storage_indices]
   cat(i,"\n")
-  #cat("estimated\n")
-  #str(rf_indiv_i)
-  #cat("true\n")
-  #str(true_indiv_i)
-  corr<-cor.test(rf_indiv_i,true_indiv_i)
-  if (((nanc == 3)) | ((nanc == 2) & (corr$estimate < 0))){
+  # cat("estimated\n")
+  # str(rf_indiv_i)
+  # cat("true\n")
+  # str(true_indiv_i)
+   if( i == 1){
+     fwrite(rf_indiv_i[,flip],"/home/rschubert1/data/Local_ancestry_project/redoancestry/rf_estimated_anc.txt",sep='\t')
+     fwrite(true_indiv_i,"/home/rschubert1/data/Local_ancestry_project/redoancestry/true_anc.txt",sep='\t')
+   }
+  
+  corr<-sum(abs(rf_indiv_i - true_indiv_i))/2
+  if (nanc == 3){
     rf_indiv_i<-rf_indiv_i[,flip]
     #str(rf_indiv_i)
-    corr<-cor.test(rf_indiv_i,true_indiv_i)
+    corr<-sum(abs(rf_indiv_i - true_indiv_i))/3
   }
-  dip_corr[i]<-corr$estimate
+  dip_corr[i]<-corr
 }
 
 dip_corr
