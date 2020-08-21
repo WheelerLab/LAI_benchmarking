@@ -39,8 +39,8 @@ awk -v o=${outDir:=$outDirDefault} '{print $1 > o $2 "_samples.txt"}' ${pop}
 
 for i in ${outDir}*_samples.txt
 do
-	bcftools view -S ${i} ${ref} -o ${i::-12}_ref.vcf
+	bcftools view -S ${i} ${ref} -o ${i::-12}_ref.vcf --force-samples
 done
 
 (/usr/bin/time -v -o ${outDir}_benchmarking.txt loter_cli -r ${outDir}*_ref.vcf -a ${query} -f vcf -o ${outDir}_results.txt -n 1 -v)
-(/usr/bin/time -v -o ${outDir}_pc_benchmarking.txt loter_cli -pc -r ${outDir}*_ref.vcf -a ${query} -f vcf -o ${outDir}_results.txt -n 1 -v)
+#(/usr/bin/time -v -o ${outDir}_pc_benchmarking.txt loter_cli -pc -r ${outDir}*_ref.vcf -a ${query} -f vcf -o ${outDir}_results.txt -n 1 -v)
