@@ -64,7 +64,7 @@ for (i in c("Loter","ELAI","LAMPLD","MOSAIC","RFMix")){
   print(cor$estimate^2)
 }
 g<-ggplot(data=Ancestry_long,aes(x=PC1, y=`% AFA`,colour=software)) +
-  geom_point() + ylab("Percent Estimated African Ancestry")
+  geom_point() + ylab("Proportion Estimated African Ancestry")
 setEPS()
 postscript("Z:/data/Local_ancestry_project/paper_run_ASW/rethin/two_way/Ancestry_vs_PC1.eps")
 g + scale_colour_viridis(discrete = T) + 

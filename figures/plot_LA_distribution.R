@@ -84,8 +84,8 @@ gP + geom_bar(position="fill",stat="identity", aes(x=reorder(ID,-perc1))) +
   # scale_color_viridis(discrete=TRUE, option="C") +
   # scale_fill_viridis(discrete=TRUE, option="C")
 dev.off()
-setEPS()
-postscript(args$out %&% ".eps")
+# setEPS()
+pdf(args$out %&% ".pdf")
 gP + geom_bar(position="fill",stat="identity", aes(x=reorder(ID,-perc1))) +
   scale_y_continuous(labels = scales::percent_format()) +
   ggtitle(args$title %&% " haplotype ancestry distribution")
